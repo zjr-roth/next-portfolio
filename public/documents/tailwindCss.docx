@@ -1,0 +1,31 @@
+** Tailwind CSS 
+
+
+***** BENEFITS 
+
+- You aren’t wasting energy inventing class names. No more adding silly 
+class names like sidebar-inner-wrapper just to be able to style something, and 
+no more agonizing over the perfect abstract name for something that’s really 
+just a flex container.
+
+- Your CSS stops growing. Using a traditional approach, your CSS files get 
+bigger every time you add a new feature. With utilities, everything is reusable 
+so you rarely need to write new CSS.
+
+- Making changes feels safer. CSS is global and you never know what you’re 
+breaking when you make a change. Classes in your HTML are local, so you can 
+change them without worrying about something else breaking.
+
+
+***** IMPORTANT DIFFERENCES BETWEEN UTILITY CLASSES AND INLINE STYLES 
+
+- Designing with constraints. Using inline styles, every value is a magic 
+number. With utilities, you’re choosing styles from a predefined design system, 
+which makes it much easier to build visually consistent UIs.
+
+- Responsive design. You can’t use media queries in inline styles, but you can 
+use Tailwind’s responsive utilities to build fully responsive interfaces easily.
+
+- Hover, focus, and other states. Inline styles can’t target states like hover 
+or focus, but Tailwind’s state variants make it easy to style those states with 
+utility classes.
