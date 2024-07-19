@@ -13,8 +13,7 @@ const HeroSection = () => {
                         Innovation is key, and I want to contribute. 
                     </p>
                     <div>
-                       <a href="#contact"><button type="button" className="bg-[#FFF] text-[#000] w-1/3 lg:w-1/2 rounded-full">Let's Talk</button></a>
-
+                       <a href="#contact"><button type="button" className="bg-[#FFF] text-[#000] w-1/3 lg:w-1/2 rounded-full hover:bg-[orange] h-8 font-bold">Let's Talk</button></a>
 
                     </div>
                 </div>
@@ -26,7 +25,7 @@ const HeroSection = () => {
                         width={300}
                         height={300}
                         />
-                </div>1
+                </div>
             </div>
         </section>
     )
