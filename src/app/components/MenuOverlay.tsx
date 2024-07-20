@@ -1,16 +1,20 @@
 import React from "react";
 import Navlink from "./NavLink";
 
-const MenuOverlay = ({links}: any) => {
+
+const MenuOverlay = ({ links }: {links: any[]} ) => {
+    console.log("Recieved links", links);
+
     return (
-        <ul className="flex flex-col py-4 items-center">
-            {console.log(links)}
-            {links.map(({link, index}: any) => (
-            <li key={index}>
-            <Navlink href={link.path} title={link.title} />
-            </li>
-            ))}
-        </ul>
+        <>
+            <ul className="flex flex-col py-4 items-center">
+                {links.map(({path, title}, index) => (
+                    <li key={index}>
+                    <Navlink href={path} title={title}/>
+                    </li>
+                ))}
+            </ul>
+        </>
     );
 };
 
