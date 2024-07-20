@@ -29,3 +29,4 @@ use Tailwind’s responsive utilities to build fully responsive interfaces easil
 - Hover, focus, and other states. Inline styles can’t target states like hover 
 or focus, but Tailwind’s state variants make it easy to style those states with 
 utility classes.
+
