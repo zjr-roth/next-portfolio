@@ -15,7 +15,7 @@ const AboutSection = () => {
     return (
         <section className="text-white">
             <div className="md:grid md:grid-cols-2 gap-8 items-center mt-10 py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-                <Image src="/images/Aboutphoto.png" width={180} height={180} className="rounded-md shadow-2xl shadow-orange-800 hover:scale-105 transition-all duration-300"/>
+                <Image src="/images/Aboutphoto.png" width={180} height={180} className="rounded-md shadow-2xl shadow-orange-900 hover:scale-105 transition-all duration-300"/>
                 <div>
                     <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
                     <p className="text-base md:text-lg">
