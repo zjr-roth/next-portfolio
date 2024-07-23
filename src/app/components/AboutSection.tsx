@@ -11,6 +11,7 @@ const TAB_DATA: any[] = [
             <li>CSS</li>
             <li>Tailwind CSS</li>
             <li>JavaScript</li>
+            <li>Typescript</li>
             <li>React</li>
             <li>Next</li>
             <li>PostgreSQL</li>
