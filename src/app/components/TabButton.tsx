@@ -1,6 +1,12 @@
-import React from "react";
+import { FC } from "react";
 
-const TabButton = ({active, selectTab, children}: any) => {
+interface TabButtonTypes {
+    active: boolean;
+    selectTab: () => void;
+    children: string;
+}
+
+const TabButton: FC<TabButtonTypes> = ({active, selectTab, children}) => {
     const buttonClasses = active ? "text-white border-b border-orange-500" : "text-[#ADB7BE]"
 
     return (

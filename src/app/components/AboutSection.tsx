@@ -1,10 +1,17 @@
 "use client";
-import React from "react";
+import React, { SetStateAction } from "react";
 import Image from "next/image";
 import { useState, useTransition } from "react";
 import TabButton from "./TabButton";
 
-const TAB_DATA: any[] = [
+interface TabItem {
+    title: string;
+    id: string;
+    content: JSX.Element;
+}
+
+
+const TAB_DATA: TabItem[] = [
     {title: "Skills", id: "skills", content: (
         <ul className="list-disc pl-2">
             <li>HTML</li>
@@ -20,6 +27,7 @@ const TAB_DATA: any[] = [
     {title: "Experience", id: "experience", content: (
         <ul className="list-disc pl-2">
             <li>Prototype.Next</li>
+            <li>freeCodeCamp</li>
             <li>Codecademy</li>
           
         </ul>
@@ -37,11 +45,11 @@ const TAB_DATA: any[] = [
 ]
 
 
-const AboutSection = () => {
-    const [tab, setTab] = useState("skills");
+const AboutSection: React.FC = () => {
+    const [tab, setTab]= useState<string>("skills");
     const [isPending, startTransition] = useTransition();
 
-    const handleTabChange = (id: any) => {
+    const handleTabChange = (id: string) => {
         startTransition(() => {
             setTab(id)
         })
@@ -49,7 +57,7 @@ const AboutSection = () => {
     return (
         <section className="text-white">
             <div className="md:grid md:grid-cols-2 gap-8 items-center  py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-                <Image src="/images/Aboutphoto.png" alt="About Photo" width={280} height={280} className="rounded-md shadow-2xl shadow-orange-900 hover:scale-105 transition-all duration-300"/>
+                <Image src="/images/Aboutphoto.png" alt="About Photo" width={200} height={200} className="rounded-md mb-[200px] shadow-2xl shadow-orange-900 hover:scale-105 transition-all duration-300"/>
                 <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
                     <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
                     <p className="text-base md:text-lg">
@@ -65,10 +73,9 @@ const AboutSection = () => {
                         <TabButton selectTab={() => handleTabChange("experience")} active={tab === "experience"}>Experience</TabButton>
                         <TabButton selectTab={() => handleTabChange("interests")} active={tab === "interests"}>Interests</TabButton> 
                     </div>
-                    <div className="mt-8">{TAB_DATA.find((t) => t.id === tab).content}</div>
+                    <div className="mt-8">{TAB_DATA.find((t) => t.id === tab)?.content}</div>
                 </div>
             </div>
-            
         </section>
     )
 

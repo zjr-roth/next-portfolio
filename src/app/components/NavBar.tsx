@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { FC } from "react";
 import { useState } from "react";
 import Image from "next/image";
 import Navlink from "./NavLink";
@@ -7,7 +7,13 @@ import { RiMenu3Line } from "react-icons/ri";
 import { GrClose } from "react-icons/gr";
 import MenuOverlay from "./MenuOverlay";
 
-const navLinks = [
+interface navLinkProps {
+    title: string;
+    path: string;
+
+}
+
+const navLinks: navLinkProps[] = [
     {
        title: "Home",
        path: "#home",
@@ -26,8 +32,8 @@ const navLinks = [
      },
 ]
 
-const Navbar = () => {
-    const [navbarOpen, setNavbarOpen] = useState(false);
+const Navbar: FC = () => {
+    const [navbarOpen, setNavbarOpen] = useState<boolean>(false);
     
 
     return (
@@ -55,7 +61,7 @@ const Navbar = () => {
                 </div>
                 <div className="menu hidden md:block md:w-auto" id="navbar">
                     <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 ">
-                       {navLinks.map((link, index) => (
+                       {navLinks.map((link, index: number) => (
                        <li key={index}>
                         <Navlink href={link.path} title={link.title}/>
                        </li>
