@@ -1,49 +1,56 @@
 "use client"
-import { FC, SetStateAction, useState } from 'react'
+import { ChangeEvent, FC, SetStateAction, useEffect, useState } from 'react'
 import { supabase } from '../lib/database/supabaseClient';
 
+interface EmailSectionTypes {
+    name: string;
+    email: string;
+    phone: string;
+    message: string
+}
 
 const EmailSection: FC = () => {
-    const [name, setName] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [phone, setPhone] = useState<string>("");
-    const [message, setMessage] = useState<string>("");
+    const [payload, setPayload] = useState<EmailSectionTypes>({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+    });
 
-    const handleName = (event: { target: { value: SetStateAction<string>; }; }) => {
-        setName(event.target.value)
+    const handlePayload = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
+        const { name, value } = event.target
+
+        setPayload(prevState => ({
+            ...prevState,
+            [name]: name == "phone" ? Number(value) : value
+        }))
     }
 
-    const handleEmail = (event: { target: { value: SetStateAction<string>; }; }) => {
-        setEmail(event.target.value)
-    }
-
-    const handlePhone = (event: { target: { value: SetStateAction<string>; }; }) => {
-        setPhone(event.target.value)
-    }
-
-    const handleMessage = (event: { target: { value: SetStateAction<string>; }; }) => {
-        setMessage(event.target.value)
-    }
 
     const postData = async (event: any) => {
-        event.preventDefault();
-        console.log("Sending data to Supabase:", { email, name, phone, message})
+        event.preventDefault()
+
+        const { name, email, phone, message } = payload
+       
+        console.log("Sending data to Supabase:", { name, email, phone, message})
         
         const { data, error } = await supabase
         .from("FormData")
-        .insert([{ email, name, phone, message }])
+        .insert([{ name, email, phone, message }])
 
         if (error) {
             console.error("Submission Failed", error);
         } else {
             console.log("Submitted Successfully", data);
-            setName("");
-            setEmail("");
-            setPhone("");
-            setMessage("");
+            setPayload({
+                name: "",
+                email: "",
+                phone: "",
+                message: ""
+            });
+            console.log("Payload after reset",payload)
         }
     }
-
 
     return (
         <section className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4">
@@ -62,21 +69,21 @@ const EmailSection: FC = () => {
                 <form onSubmit={postData} className="flex flex-col gap-4">
                     <div className="mb-6">
                         <label htmlFor="name"className="text-white block mb-2 text-sm font-medium">Full Name</label>
-                        <input onChange={handleName} name="name" id="name" type="text" required className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5" placeholder="Harry Potter"/>
+                        <input onChange={handlePayload} value={payload.name} name="name" id="name" type="text" required className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5" placeholder="Harry Potter"/>
                     </div>
                     <div className="mb-6"> 
                         <label htmlFor="email"className="text-white block mb-2 text-sm font-medium">Email</label>
-                        <input onChange={handleEmail} name="email" id="email" type="email" required className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5" placeholder="Harry@Hogwarts.edu"/>
+                        <input onChange={handlePayload} value={payload.email} name="email" id="email" type="email" required className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5" placeholder="Harry@Hogwarts.edu"/>
                     </div>
                     <div className="mb-6">
                         <label htmlFor="phone"className="text-white block mb-2 text-sm font-medium">Phone</label>
-                        <input onChange={handlePhone} name="phone" id="phone" type="tel" className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5" placeholder="(888)-888-8888"/>
+                        <input onChange={handlePayload} value={payload.phone} name="phone" id="phone" type="tel" className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5" placeholder="(888)-888-8888"/>
                     </div>
                     <div className="mb-6">
                         <label htmlFor="message"className="text-white block mb-2 text-sm font-medium">Message</label>
-                        <textarea onChange={handleMessage} name="message" id="message" className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5" placeholder="Hey! "/>
+                        <textarea onChange={handlePayload} value={payload.message} name="message" id="message" className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5" placeholder="Hey! "/>
                     </div>
-                    <button className="bg-gradient-to-br from-orange-700 via-orange-500 to-orange-800 hover:opacity-75 text-white font-medium py-2.5 px-5 rounded-lg w-full">Submit</button>
+                    <button type="submit" className="bg-gradient-to-br from-orange-700 via-orange-500 to-orange-800 hover:opacity-75 text-white font-medium py-2.5 px-5 rounded-lg w-full">Submit</button>
                 </form>
             </div>
         </section>
