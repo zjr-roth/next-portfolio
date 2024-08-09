@@ -27,6 +27,10 @@ const navLinks: navLinkProps[] = [
         path: "#projects",
      },
      {
+        title: "Blogs",
+        path: "#blogs",
+     },
+     {
         title: "Contact",
         path: "#contact", 
      },
