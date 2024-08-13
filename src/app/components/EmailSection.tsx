@@ -16,13 +16,14 @@ const EmailSection: FC = () => {
         phone: "",
         message: ""
     });
-    const [emailStyles, setEmailStyles] = useState<CSSProperties>({})
-    const [phoneStyles, setPhoneStyles] = useState<CSSProperties>({})
-    const [formStyles, setFormStyles] = useState<CSSProperties>({})
-    const [submitStyles, setSubmitStyles] = useState<CSSProperties>({})
+    const [emailStyles, setEmailStyles] = useState<CSSProperties>({});
+    const [phoneStyles, setPhoneStyles] = useState<CSSProperties>({});
+    const [formStyles, setFormStyles] = useState<CSSProperties>({});
+    const [submitStylesHeader, setSubmitHeaderStyles] = useState<CSSProperties>({});
+    const [submitStyles, setSubmitStyles] = useState<CSSProperties>({});
 
     const handlePayload = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-        const { name, value } = event.target
+        const { name, value } = event.target;
 
         setPayload(prevState => ({
             ...prevState,
@@ -47,28 +48,31 @@ const EmailSection: FC = () => {
         } else {
             console.log("Submitted Successfully", data);
             setFormStyles({ display: "none" })
-            setSubmitStyles({ 
+            setSubmitHeaderStyles({ 
                 display: "flex", 
-                flexDirection: "column",
-                gap: "4", 
+                flexDirection: "column", 
                 background: "linear-gradient(to right, #c2410c, #f97316, #9a3412)",
                 color: 'transparent',
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
-                fontSize: "4rem",
-                textAlign: "center",
-                justifyContent: "center",
-                alignItems: "center",
+                justifyContent: "flex-start",
+                fontSize: '1.75rem',
                 marginTop: "3rem",
-                paddingTop: "10rem",
-
-                
+                paddingTop: "10rem", 
+                marginBottom: '1.5rem',
+            })
+            setSubmitStyles({
+                display: "flex", 
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                color: 'white',
+                marginTop: '0.5rem'
             })
             setPayload({
                 name: "",
                 email: "",
                 phone: "",
-                message: ""
+                message: "",
             });
             console.log("Payload after reset",payload)
         }
@@ -109,7 +113,12 @@ const EmailSection: FC = () => {
 
     return (
         <>
-        <h1 style={submitStyles} className='hidden'>Thank You!</h1>
+        <div>
+            <h1 style={submitStylesHeader} className='hidden'>Thank you for getting in touch!</h1>
+            <p style={submitStyles} className='hidden'>I have received your message and will get back to you by email as soon as possible.</p>
+            <p style={submitStyles} className='hidden'>Talk to you soon!</p>
+
+        </div>
         <section id="contact"className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4">
             <div style={formStyles}>
                 <h5 className="text-xl font-bold text-white my-2">Let's Connect</h5>
